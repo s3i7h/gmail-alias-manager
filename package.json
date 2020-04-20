@@ -1,0 +1,10 @@
+{
+  "name": "gmail-alias-manager",
+  "version": "1.0.0",
+  "description": "a spa to manage aliases for a gmail address",
+  "main": "index.js",
+  "repository": "https://github.com/yu-ichiro/gmail-alias-manager",
+  "author": "Yuichiro Smith <contact@yu-smith.com>",
+  "license": "MIT",
+  "private": true
+}
