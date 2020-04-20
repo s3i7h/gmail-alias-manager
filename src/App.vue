@@ -1,8 +1,21 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <div class="d-flex align-center">
+        Gmail Alias Manager
+      </div>
+      <v-spacer></v-spacer>
+    </v-app-bar>
+    <v-content>
+      <v-container fluid>
+        <v-card>
+          <v-card-title>
+            Alias Manager
+          </v-card-title>
+        </v-card>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script lang="ts">
@@ -16,14 +29,4 @@ import HelloWorld from "./components/HelloWorld.vue";
 })
 export default class App extends Vue {}
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
-</style>
