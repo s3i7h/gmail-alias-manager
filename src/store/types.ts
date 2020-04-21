@@ -3,4 +3,5 @@ export interface RootState {
   aliasBlueprint: string;
   aliases: string[];
   counts: Record<string, number>;
+  aliasPropComponents: Record<string, string[]>;
 }

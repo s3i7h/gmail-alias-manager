@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface PlainComponent {
   type: "plain";
   char: string;
@@ -9,7 +10,7 @@ export interface PropComponent {
   char: (binding: any) => string;
 }
 
-type FormatComponent = PlainComponent | PropComponent;
+export type FormatComponent = PlainComponent | PropComponent;
 
 export const parseFormat: <T>(
   formatString: string

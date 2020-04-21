@@ -13,7 +13,8 @@ const defaultRootState: () => RootState = () => ({
   address: "",
   aliasBlueprint: "{timestamp}",
   aliases: [],
-  counts: {}
+  counts: {},
+  aliasPropComponents: {}
 });
 
 @Module({
@@ -45,6 +46,34 @@ class RootModule extends VuexModule implements RootState {
   @Mutation
   setCounts(newCounts: Record<string, number>) {
     this.counts = newCounts;
+  }
+
+  aliasPropComponents: Record<string, string[]> = {};
+  @Mutation
+  setAliasPropComponents(newComponents: Record<string, string[]>) {
+    this.aliasPropComponents = newComponents;
+  }
+
+  @Mutation
+  addAliasPropComponent(payload: {
+    componentKey: string | number;
+    item: string;
+  }) {
+    console.log(payload);
+    const newAliasComponents = deepAssign({}, this.aliasPropComponents);
+    if (!(payload.componentKey in newAliasComponents))
+      newAliasComponents[payload.componentKey] = [];
+    newAliasComponents[payload.componentKey].push(payload.item);
+    this.aliasPropComponents = newAliasComponents;
+  }
+
+  @Mutation
+  removeAliasPropComponent(componentKey: string, index: number) {
+    const newAliasComponents = deepAssign({}, this.aliasPropComponents);
+    if (!(componentKey in newAliasComponents)) return false;
+    if (newAliasComponents[componentKey].length <= index) return false;
+    newAliasComponents[componentKey].splice(index, 1);
+    this.setAliasPropComponents(newAliasComponents);
   }
 
   @Mutation

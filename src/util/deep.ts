@@ -26,6 +26,8 @@ export const deepAssign: <T, U>(obj: T, ...otherObjects: U[]) => T & U = <T, U>(
           )
         ) {
           newObj[key] = value;
+        } else if (value instanceof Array) {
+          newObj[key] = Array.from(value);
         } else {
           newObj[key] = deepAssign(newObj[key], value);
         }
