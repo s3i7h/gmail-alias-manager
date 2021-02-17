@@ -59,7 +59,6 @@ class RootModule extends VuexModule implements RootState {
     componentKey: string | number;
     item: string;
   }) {
-    console.log(payload);
     const newAliasComponents = deepAssign({}, this.aliasPropComponents);
     if (!(payload.componentKey in newAliasComponents))
       newAliasComponents[payload.componentKey] = [];

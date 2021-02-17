@@ -1,7 +1,5 @@
-export function generateNonce(): bigint {
-  let n = BigInt(Math.random() * 1000000000000000000000);
-  n *= BigInt(new Date());
-  return n;
+export function generateNonce() {
+  return Number(new Date()) * Math.random();
 }
 
 export const id = (function() {

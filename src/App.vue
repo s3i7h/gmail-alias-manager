@@ -153,16 +153,6 @@ export default class App extends Vue {
   }
 
   get aliasBinding() {
-    console.log(
-      this.aliasPreviewBinding,
-      this.aliasComponentObject,
-      Object.fromEntries(
-        Object.entries(this.aliasComponentData).map(([key, component]) => [
-          key,
-          component.value
-        ])
-      )
-    );
     return deepAssign(
       this.aliasPreviewBinding,
       this.aliasComponentObject,
@@ -237,14 +227,9 @@ export default class App extends Vue {
 
   aliasPropComponentDataSetter(componentKey: string | number) {
     return (newValue: string | { text: string; value: string }) => {
-      console.log(
-        componentKey,
-        typeof newValue === typeof "" && String(newValue)
-      );
       let validatedValue: { text: string; value: string };
       if (typeof newValue === typeof "") {
         validatedValue = { text: String(newValue), value: String(newValue) };
-        console.log(validatedValue);
         rootModule.addAliasPropComponent({
           componentKey,
           item: String(newValue)

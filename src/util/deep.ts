@@ -6,7 +6,7 @@ export const deepAssign: <T, U>(obj: T, ...otherObjects: U[]) => T & U = <T, U>(
   if (otherObjects.length > 1)
     return deepAssign(
       deepAssign(obj, otherObjects[0]),
-      ...otherObjects.filter((_, index) => index !== 0)
+      ...otherObjects.slice(1)
     );
   if (otherObjects.length < 1) return deepAssign(obj, {} as any) as T & U;
   const otherObject = otherObjects[0];
@@ -16,14 +16,25 @@ export const deepAssign: <T, U>(obj: T, ...otherObjects: U[]) => T & U = <T, U>(
     for (const key in _obj) {
       if (Object.prototype.hasOwnProperty.call(_obj, key)) {
         const value = _obj[key];
+        const primitives = [
+          window.String,
+          window.Number,
+          window.Boolean,
+          window.Symbol,
+          void 0
+        ];
         // noinspection JSPrimitiveTypeWrapperUsage
         if (
-          [String(), Number(), Boolean(), BigInt(1), Symbol(), void 0]
+          primitives
+            .map(primitiveWrapper => primitiveWrapper && primitiveWrapper())
             .map(primitive => typeof primitive)
             .includes(typeof value) ||
-          [Date, BigInt].some(
-            frozenObjectConstructor => value instanceof frozenObjectConstructor
-          )
+          [window.Date, window.BigInt]
+            .filter(Boolean)
+            .some(
+              frozenObjectConstructor =>
+                value instanceof frozenObjectConstructor
+            )
         ) {
           newObj[key] = value;
         } else if (value instanceof Array) {
